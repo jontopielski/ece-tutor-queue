@@ -2,6 +2,7 @@
 users: {
   user1: {
     name: 'Jon Topielski',
+    user_id: 'user1',
     activity_state: 'ACTIVE', // ['ACTIVE', 'INACTIVE', 'AWAY', 'RETIRED']
     account_type: 'TUTOR', // ['STUDENT', 'TUTOR', 'ADMIN']
     ticket_history: {

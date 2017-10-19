@@ -4,15 +4,16 @@
     isFetching,
     error,
     authedId,
-    lastUpdated,
-    [studentId]: {
+    [userId]: {
       info: {
         name,
+        userId,
         activityState,
         accountType,
         ticketHistory: [ticketId, ticketId, ticketId],
         accountCreated
-      }
+      },
+      lastUpdated
     }
   },
   modal: {
