@@ -32,8 +32,7 @@ const Home = props => (
 const mapStateToProps = state => ({
   count: state.counter.count,
   isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing,
-  tickets: state.counter.tickets
+  isDecrementing: state.counter.isDecrementing
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
