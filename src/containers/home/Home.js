@@ -16,23 +16,15 @@ import "./Home.css"
 const Home = props => (
   <div className="Home" >
     <h1>ECE Tutoring Queue</h1>
+    <p>Hello <p className="Home-user-name">{props.user_name}</p>
+          there are currently </p>
     <p className="Home-queue"> {props.length} People in Line</p>
-    <p>
-      <button onClick={props.increment} disabled={props.isIncrementing}>Increment</button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>Increment Async</button>
-    </p>
-
-    <p>
-      <button onClick={props.decrement} disabled={props.isDecrementing}>Decrementing</button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>Decrement Async</button>
-    </p>
-
-    <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p>
     <p><button onClick={() => { props.reserveTicket(); props.getQueueLength()}}> Reserve Now </button></p>
   </div>
 )
 
 const mapStateToProps = state => ({
+  user_name: state.counter.user.user_name,
   length: state.counter.tickets.length,
   isIncrementing: state.counter.isIncrementing,
   isDecrementing: state.counter.isDecrementing

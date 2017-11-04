@@ -8,21 +8,19 @@ import {
 } from '../../modules/counter'
 
 import "./Tutor.css"
+import Ticket from '../../components/ticket/Ticket'
 
 const Tutor = props => (
   <div className="Tutor" >
     <h1>ECE Tutor Panel </h1>
     <p className=""> {
       props.tickets.map(function(item){
-      return (<div> <li>
-        Name: {item.student_name}
-        Status: {item.status}
-        Class: {item.class}
-      </li>
-      <button onClick={() => {props.updateTicket(item.t_id);}}> Select </button>
-      <button onClick={() => {props.resolveTicket(item.t_id);}}> Resolve </button>
-      </div>)
-
+      return ( <Ticket item={item}
+              actions={{
+                  updateTicket: props.updateTicket.bind(this),
+                  resolveTicket: props.resolveTicket.bind(this)
+              }} />
+            )
     })} </p>
   </div>
 )

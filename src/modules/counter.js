@@ -8,6 +8,11 @@ export const TICKET_RESERVE = 'counter/TICKET_RESERVE'
 export const GET_QUEUE_LENGTH = 'counter/GET_QUEUE_LENGTH'
 
 const initialState = {
+  user: {
+    type: "student",
+    user_name: "NotoriousNapper",
+    name: "Jesse Ren"
+  },
   count: 1,
   tickets: [
     {
@@ -81,8 +86,8 @@ export default (state = initialState, action) => {
       }
 
     case TICKET_RESERVE:
-      const randTicket = {
-        t_id: "1",
+      let randTicket = {
+        t_id: "" + (state.tickets.length + 1),
         status: "OPEN",
         tutor_id:"",
         student_id:"",
@@ -93,7 +98,6 @@ export default (state = initialState, action) => {
       }
 
       const newArr = state.tickets.slice().push(randTicket)
-      alert(newArr)
       return {
         ...state,
         tickets: [...state.tickets, randTicket]
