@@ -4,6 +4,8 @@ export const DECREMENT_REQUESTED = 'counter/DECREMENT_REQUESTED'
 export const DECREMENT = 'counter/DECREMENT'
 export const TICKET_UPDATE = 'counter/TICKET_UPDATE'
 export const TICKET_RESOLVE = 'counter/TICKET_RESOLVE'
+export const TICKET_RESERVE = 'counter/TICKET_RESERVE'
+export const GET_QUEUE_LENGTH = 'counter/GET_QUEUE_LENGTH'
 
 const initialState = {
   count: 1,
@@ -78,11 +80,38 @@ export default (state = initialState, action) => {
       )
       }
 
+    case TICKET_RESERVE:
+      const randTicket = {
+        t_id: "1",
+        status: "OPEN",
+        tutor_id:"",
+        student_id:"",
+        student_name:"Jesse Ren",
+        class:"",
+        time_start: 0,
+        time_end: 0
+      }
+
+      const newArr = state.tickets.slice().push(randTicket)
+      alert(newArr)
+      return {
+        ...state,
+        tickets: [...state.tickets, randTicket]
+      }
+
+    case GET_QUEUE_LENGTH:
+      return {
+        ...state,
+        length: state.tickets.length
+      }
+
     default:
       return state
   }
 }
 
+
+/* Actions & Thunks */
 export const increment = () => {
   return dispatch => {
     dispatch({
@@ -149,6 +178,23 @@ export const updateTicket = (id) => {
     dispatch({
       type: TICKET_UPDATE,
       selected_ticket: id
+    })
+  }
+}
+
+export const reserveTicket = (ticket) => {
+  return dispatch => {
+    dispatch({
+      type: TICKET_RESERVE,
+      ticket: ticket
+    })
+  }
+}
+
+export const getQueueLength = () => {
+  return dispatch => {
+    dispatch({
+      type: GET_QUEUE_LENGTH
     })
   }
 }

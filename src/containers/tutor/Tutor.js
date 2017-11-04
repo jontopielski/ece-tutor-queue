@@ -28,9 +28,6 @@ const Tutor = props => (
 )
 
 const mapStateToProps = state => ({
-  count: state.counter.count,
-  isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing,
   tickets: state.counter.tickets
 })
 
