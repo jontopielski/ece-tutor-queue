@@ -13,8 +13,23 @@ import Ticket from '../../components/ticket/Ticket'
 const Tutor = props => (
   <div className="Tutor" >
     <h1>ECE Tutor Panel </h1>
-    <p className=""> {
+
+    <p className="">
+      Current Queue
+
+     {
       props.tickets.map(function(item){
+      return ( <Ticket item={item}
+              actions={{
+                  updateTicket: props.updateTicket.bind(this),
+                  resolveTicket: props.resolveTicket.bind(this)
+              }} />
+            )
+    })} </p>
+
+      Finished Queue
+    <p className=""> {
+      props.archive.map(function(item){
       return ( <Ticket item={item}
               actions={{
                   updateTicket: props.updateTicket.bind(this),
@@ -26,7 +41,8 @@ const Tutor = props => (
 )
 
 const mapStateToProps = state => ({
-  tickets: state.counter.tickets
+  tickets: state.counter.tickets,
+  archive: state.counter.archive
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

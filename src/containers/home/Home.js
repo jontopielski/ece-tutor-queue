@@ -11,6 +11,9 @@ import {
   getQueueLength
 } from '../../modules/counter'
 
+import CustomerForm from '../../components/modal/Modal'
+import Ticket from '../../components/ticket/Ticket'
+
 import "./Home.css"
 
 const Home = props => (
@@ -19,7 +22,9 @@ const Home = props => (
     <p>Hello <p className="Home-user-name">{props.user_name}</p>
           there are currently </p>
     <p className="Home-queue"> {props.length} People in Line</p>
+
     <p><button onClick={() => { props.reserveTicket(); props.getQueueLength()}}> Reserve Now </button></p>
+    <CustomerForm />
   </div>
 )
 
@@ -31,10 +36,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync,
   reserveTicket,
   getQueueLength,
   changePage: () => push('/about-us')

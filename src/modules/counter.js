@@ -13,7 +13,8 @@ const initialState = {
     user_name: "NotoriousNapper",
     name: "Jesse Ren"
   },
-  count: 1,
+  count: 2,
+  archive: [],
   tickets: [
     {
       t_id: "1",
@@ -22,6 +23,7 @@ const initialState = {
       student_id:"",
       student_name:"Jesse Ren",
       class:"",
+      note:"",
       time_start: 0,
       time_end: 0
     },
@@ -32,6 +34,7 @@ const initialState = {
       student_id:"",
       student_name:"John Topielski",
       class:"",
+      note:"",
       time_start: 0,
       time_end: 0
     }
@@ -69,9 +72,13 @@ export default (state = initialState, action) => {
       }
 
     case TICKET_RESOLVE:
+      let ticket = state.tickets.find( item => item.t_id === action.selected_ticket );
+      let status = "CLOSED";
+      let dateTime = new Date();
       return {
         ...state,
-        tickets: state.tickets.filter(({t_id})=> t_id !== action.selected_ticket)
+        tickets: state.tickets.filter(({t_id})=> t_id !== action.selected_ticket),
+        archive: [ ...state.archive, { ...ticket, status, time_end : dateTime} ]
       }
 
     case TICKET_UPDATE:
@@ -87,19 +94,20 @@ export default (state = initialState, action) => {
 
     case TICKET_RESERVE:
       let randTicket = {
-        t_id: "" + (state.tickets.length + 1),
+        t_id: "" + (state.count + 1),
         status: "OPEN",
         tutor_id:"",
         student_id:"",
-        student_name:"Jesse Ren",
-        class:"",
+        student_name: action.data.name,
+        class: action.data.class,
+        note: action.data.note,
         time_start: 0,
         time_end: 0
       }
 
-      const newArr = state.tickets.slice().push(randTicket)
       return {
         ...state,
+        count: state.count + 1,
         tickets: [...state.tickets, randTicket]
       }
 
@@ -187,10 +195,18 @@ export const updateTicket = (id) => {
 }
 
 export const reserveTicket = (ticket) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    // get modal from modal store
+    const modal = getState()
+        .modal;
     dispatch({
       type: TICKET_RESERVE,
-      ticket: ticket
+      ticket: ticket,
+      data: {
+        name: modal.name,
+        class: modal.class,
+        note: modal.note
+      }
     })
   }
 }

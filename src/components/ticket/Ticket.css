@@ -11,6 +11,19 @@
   margin-right: 5px;
   width: 100px;
 }
+.Ticket-Button {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 100px;
+}
+
+.Ticket-Time {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 500px;
+}
 
 .Ticket-Status-In-Progress {
   background-color: #F0EF45;
@@ -21,6 +34,14 @@
 }
 .Ticket-Status-Free{
   background-color: #55DC33;
+  display: inline-block;
+  text-align: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 100px;
+}
+.Ticket-Status-Closed{
+  background-color: #3E6898;
   display: inline-block;
   text-align: center;
   margin-left: 5px;
