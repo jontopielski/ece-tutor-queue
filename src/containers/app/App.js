@@ -22,9 +22,9 @@
 
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
-import Home from '../home/Home'
-import About from '../about/About'
-import Tutor from '../tutor/Tutor'
+import Home from 'containers'
+import About from 'containers'
+import Tutor from 'containers'
 import './App.css'
 
 const App = () => (
