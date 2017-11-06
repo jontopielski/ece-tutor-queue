@@ -27,10 +27,10 @@ export default class Ticket extends PureComponent {
        return (
          <div className='Ticket'>
            <div className='Ticket-Item'>{first_name + ' ' +  last_name + '.'}</div>
-           <div id='status' className={(status === 'CLOSED') ? 'Ticket-Status-Closed' :
+           <div className={(status === 'CLOSED') ? 'Ticket-Status-Closed' :
                 (status === "OPEN" ) ? 'Ticket-Status-Free' : 'Ticket-Status-In-Progress' }
                 >{status}</div>
-           <div className='Ticket-Item'>{class_num}</div>
+           <div className='Ticket-Item'> ECE {class_num}</div>
            { buttons }
            { time }
          </div>

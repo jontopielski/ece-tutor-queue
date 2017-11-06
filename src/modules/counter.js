@@ -22,7 +22,7 @@ const initialState = {
       tutor_id:"",
       student_id:"",
       student_name:"Jesse Ren",
-      class:"",
+      class_num:"30",
       note:"",
       time_start: 0,
       time_end: 0
@@ -33,7 +33,7 @@ const initialState = {
       tutor_id:"",
       student_id:"",
       student_name:"John Topielski",
-      class:"",
+      class_num:"103",
       note:"",
       time_start: 0,
       time_end: 0
@@ -99,7 +99,7 @@ export default (state = initialState, action) => {
         tutor_id:"",
         student_id:"",
         student_name: action.data.name,
-        class: action.data.class,
+        class_num: action.data.class_num,
         note: action.data.note,
         time_start: 0,
         time_end: 0
@@ -204,7 +204,7 @@ export const reserveTicket = (ticket) => {
       ticket: ticket,
       data: {
         name: modal.name,
-        class: modal.class,
+        class_num: modal.class_num,
         note: modal.note
       }
     })
