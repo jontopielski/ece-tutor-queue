@@ -9,19 +9,17 @@
         name,
         userId,
         activityState,
-        accountType,
+        isTutor,
         ticketHistory: [ticketId, ticketId, ticketId],
         accountCreated
       },
-      lastUpdated
+      lastUpdated,
     }
   },
   modal: {
-    ticket: {
-      name,
-      class,
-      additionalInfo
-    },
+    name,
+    class,
+    additionalInfo,
     isOpen
   },
   // TODO: Decide whether or not to include all tickets from redux state
@@ -36,28 +34,13 @@
         additionalInfo,
         timeStart,
         timeEnd,
-        status
+        isInProgress,
       }
     }
   },
   queue: {
     isFetching,
     error,
-    newTicketsAvailable,
-    ticketsToAdd: {
-      [ticketId]: {
-        info: {
-          tutorId,
-          studentId,
-          studentName,
-          class,
-          additionalInfo,
-          timeStart,
-          timeEnd,
-          status
-        }
-      }
-    },
     lastUpdated,
     tickets: {
       [ticketId]: {

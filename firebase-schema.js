@@ -2,29 +2,29 @@
 users: {
   user1: {
     name: 'Jon Topielski',
-    user_id: 'user1',
-    activity_state: 'ACTIVE', // ['ACTIVE', 'INACTIVE', 'AWAY', 'RETIRED']
-    account_type: 'TUTOR', // ['STUDENT', 'TUTOR', 'ADMIN']
-    ticket_history: {
+    uid: 'user1',
+    activityState: 'ACTIVE', // ['ACTIVE', 'INACTIVE', 'AWAY', 'RETIRED']
+    isTutor: false,
+    ticketHistory: {
       'ticket1',
       'ticket12',
       'ticket22',
     }
-    account_created: 1508024124,
+    accountCreated: 1508024124,
   }
 }
 
 //tickets
 tickets: {
   ticket1: {
-    tutor_id: 'tutor1',
-    student_id: 'student1',
-    student_name: 'Jon Topielski',
+    tutorId: 'tutor1',
+    studentId: 'student1',
+    studentName: 'Jon Topielski',
     class: 'ECE 35', // May be enum
-    additional_info: 'Doing HW 4',
-    time_start: 1508024124,
-    time_end: 1508024555,
-    status: 'CLOSED', // ['OPEN', 'IN_PROGRESS', 'CLOSED']
+    additionalInfo: 'Doing HW 4',
+    startTimestamp: 1508024124,
+    endTimestamp: 1508024555,
+    isInProgress: false,
   }
 }
 
@@ -32,14 +32,14 @@ tickets: {
 queue: {
   tickets: {
     ticket1: {
-      tutor_id: 'tutor1',
-      student_id: 'student1',
-      student_name: 'Jon Topielski',
+      tutorId: 'tutor1',
+      studentId: 'student1',
+      studentName: 'Jon Topielski',
       class: 'ECE 35', // May be enum
-      additional_info: 'Doing HW 4',
-      time_start: 1508024124,
-      time_end: 1508024555,
-      status: 'CLOSED', // ['OPEN', 'IN_PROGRESS', 'CLOSED']
+      additionalInfo: 'Doing HW 4',
+      startTimestamp: 1508024124,
+      endTimestamp: 1508024555,
+      isInProgress: false,
     },
     ticket2: {
       …

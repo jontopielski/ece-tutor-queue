@@ -11,28 +11,28 @@ const initialState = {
   count: 1,
   tickets: [
     {
-      t_id: "1",
-      status: "OPEN",
-      tutor_id:"",
-      student_id:"",
-      student_name:"Jesse Ren",
-      class:"",
+      t_id: '1',
+      status: 'OPEN',
+      tutor_id: '',
+      student_id: '',
+      student_name: 'Jesse Ren',
+      class: '',
       time_start: 0,
-      time_end: 0
+      time_end: 0,
     },
     {
-      t_id: "2",
-      status: "OPEN",
-      tutor_id:"",
-      student_id:"",
-      student_name:"John Topielski",
-      class:"",
+      t_id: '2',
+      status: 'OPEN',
+      tutor_id: '',
+      student_id: '',
+      student_name: 'John Topielski',
+      class: '',
       time_start: 0,
-      time_end: 0
-    }
+      time_end: 0,
+    },
   ],
   isIncrementing: false,
-  isDecrementing: false
+  isDecrementing: false,
 }
 
 export default (state = initialState, action) => {
@@ -40,69 +40,69 @@ export default (state = initialState, action) => {
     case INCREMENT_REQUESTED:
       return {
         ...state,
-        isIncrementing: true
+        isIncrementing: true,
       }
 
     case INCREMENT:
       return {
         ...state,
         count: state.count + 1,
-        isIncrementing: !state.isIncrementing
+        isIncrementing: !state.isIncrementing,
       }
 
     case DECREMENT_REQUESTED:
       return {
         ...state,
-        isDecrementing: true
+        isDecrementing: true,
       }
 
     case DECREMENT:
       return {
         ...state,
         count: state.count - 1,
-        isDecrementing: !state.isDecrementing
+        isDecrementing: !state.isDecrementing,
       }
 
     case TICKET_RESOLVE:
       return {
         ...state,
-        tickets: state.tickets.filter(({t_id})=> t_id !== action.selected_ticket)
+        tickets: state.tickets.filter(({t_id}) => t_id !== action.selected_ticket),
       }
 
     case TICKET_UPDATE:
       return {
         ...state,
-        tickets: state.tickets.map(item => item.t_id === action.selected_ticket ?
-            // transform one with matching id, change field
-            { ...item, status: "IN_PROGRESS" } :
-            // otherwise return original
-            item
-      )
+        tickets: state.tickets.map(item => item.t_id === action.selected_ticket
+          // transform one with matching id, change field
+          ? { ...item, status: 'IN_PROGRESS' }
+          // otherwise return original
+          : item
+        ),
       }
 
     case TICKET_RESERVE:
       const randTicket = {
-        t_id: "1",
-        status: "OPEN",
-        tutor_id:"",
-        student_id:"",
-        student_name:"Jesse Ren",
-        class:"",
+        t_id: '1',
+        status: 'OPEN',
+        tutor_id: '',
+        student_id: '',
+        student_name: 'Jesse Ren',
+        class: '',
         time_start: 0,
-        time_end: 0
+        time_end: 0,
       }
 
       const newArr = state.tickets.slice().push(randTicket)
       alert(newArr)
       return {
         ...state,
-        tickets: [...state.tickets, randTicket]
+        tickets: [...state.tickets, randTicket],
       }
 
     case GET_QUEUE_LENGTH:
       return {
         ...state,
-        length: state.tickets.length
+        length: state.tickets.length,
       }
 
     default:
@@ -110,16 +110,15 @@ export default (state = initialState, action) => {
   }
 }
 
-
 /* Actions & Thunks */
 export const increment = () => {
   return dispatch => {
     dispatch({
-      type: INCREMENT_REQUESTED
+      type: INCREMENT_REQUESTED,
     })
 
     dispatch({
-      type: INCREMENT
+      type: INCREMENT,
     })
   }
 }
@@ -127,12 +126,12 @@ export const increment = () => {
 export const incrementAsync = () => {
   return dispatch => {
     dispatch({
-      type: INCREMENT_REQUESTED
+      type: INCREMENT_REQUESTED,
     })
 
     return setTimeout(() => {
       dispatch({
-        type: INCREMENT
+        type: INCREMENT,
       })
     }, 3000)
   }
@@ -141,11 +140,11 @@ export const incrementAsync = () => {
 export const decrement = () => {
   return dispatch => {
     dispatch({
-      type: DECREMENT_REQUESTED
+      type: DECREMENT_REQUESTED,
     })
 
     dispatch({
-      type: DECREMENT
+      type: DECREMENT,
     })
   }
 }
@@ -153,12 +152,12 @@ export const decrement = () => {
 export const decrementAsync = () => {
   return dispatch => {
     dispatch({
-      type: DECREMENT_REQUESTED
+      type: DECREMENT_REQUESTED,
     })
 
     return setTimeout(() => {
       dispatch({
-        type: DECREMENT
+        type: DECREMENT,
       })
     }, 3000)
   }
@@ -168,7 +167,7 @@ export const resolveTicket = (id) => {
   return dispatch => {
     dispatch({
       type: TICKET_RESOLVE,
-      selected_ticket: id
+      selected_ticket: id,
     })
   }
 }
@@ -177,7 +176,7 @@ export const updateTicket = (id) => {
   return dispatch => {
     dispatch({
       type: TICKET_UPDATE,
-      selected_ticket: id
+      selected_ticket: id,
     })
   }
 }
@@ -186,7 +185,7 @@ export const reserveTicket = (ticket) => {
   return dispatch => {
     dispatch({
       type: TICKET_RESERVE,
-      ticket: ticket
+      ticket: ticket,
     })
   }
 }
@@ -194,7 +193,7 @@ export const reserveTicket = (ticket) => {
 export const getQueueLength = () => {
   return dispatch => {
     dispatch({
-      type: GET_QUEUE_LENGTH
+      type: GET_QUEUE_LENGTH,
     })
   }
 }
