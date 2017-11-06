@@ -23,8 +23,8 @@ const Home = props => (
           there are currently </p>
     <p className="Home-queue"> {props.length} People in Line</p>
 
-    <p><button onClick={() => { props.reserveTicket(); props.getQueueLength()}}> Reserve Now </button></p>
     <CustomerForm />
+    <p><button onClick={() => { props.reserveTicket(); props.getQueueLength()}}> Reserve Now </button></p>
   </div>
 )
 
