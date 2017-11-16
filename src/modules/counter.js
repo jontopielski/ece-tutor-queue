@@ -7,6 +7,9 @@ export const TICKET_RESOLVE = 'counter/TICKET_RESOLVE'
 export const TICKET_RESERVE = 'counter/TICKET_RESERVE'
 export const GET_QUEUE_LENGTH = 'counter/GET_QUEUE_LENGTH'
 
+/* In Session.js */
+export const ASSIGN_TICKET = 'counter/ASSIGN_TICKET'
+
 const initialState = {
   user: {
     type: "student",
@@ -19,6 +22,10 @@ const initialState = {
     {
       t_id: "1",
       status: "OPEN",
+      tutor:   {
+        id: "",
+        name: ""
+      },// merge this with the below
       tutor_id:"",
       student_id:"",
       student_name:"Jesse Ren",
@@ -82,33 +89,27 @@ export default (state = initialState, action) => {
       }
 
     case TICKET_UPDATE:
+      let data = {
+        status: "IN_PROGRESS",
+        tutor_id: action.tutor_id,
+        tutor_name: action.tutor_name
+      }
+      alert(JSON.stringify(data, null, 4))
       return {
         ...state,
         tickets: state.tickets.map(item => item.t_id === action.selected_ticket ?
             // transform one with matching id, change field
-            { ...item, status: "IN_PROGRESS" } :
+            { ...item, ...data } :
             // otherwise return original
             item
       )
       }
 
     case TICKET_RESERVE:
-      let randTicket = {
-        t_id: "" + (state.count + 1),
-        status: "OPEN",
-        tutor_id:"",
-        student_id:"",
-        student_name: action.data.name,
-        class_num: action.data.class_num,
-        note: action.data.note,
-        time_start: 0,
-        time_end: 0
-      }
-
       return {
         ...state,
         count: state.count + 1,
-        tickets: [...state.tickets, randTicket]
+        tickets: [...state.tickets, action.ticket]
       }
 
     case GET_QUEUE_LENGTH:
@@ -185,29 +186,59 @@ export const resolveTicket = (id) => {
   }
 }
 
+
+// For Now, just grabs sessions tutor
 export const updateTicket = (id) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { session }  = getState();
     dispatch({
       type: TICKET_UPDATE,
-      selected_ticket: id
+      selected_ticket: id,
+      tutor_id: session.tutor.user_id,
+      tutor_name: session.tutor.name
     })
   }
 }
 
 export const reserveTicket = (ticket) => {
   return (dispatch, getState) => {
-    // get modal from modal store
-    const modal = getState()
-        .modal;
-    dispatch({
-      type: TICKET_RESERVE,
-      ticket: ticket,
-      data: {
-        name: modal.name,
-        class_num: modal.class_num,
-        note: modal.note
+
+    const { modal, session, counter }  = getState();
+
+    // See if student already has a ticket
+    let isReserved = false;
+    for (var i = 0; i < counter.tickets.length; i ++){
+      if (counter.tickets[i].student_id === session.user.user_id){
+        isReserved = true;
+        break;
       }
-    })
+    }
+
+    let randTicket = {
+      t_id: "" + (counter.count + 1),
+      status: "OPEN",
+      tutor_id: session.tutor.details.tutor_id,
+      student_id: session.user.user_id,
+      student_name: session.user.user_name,
+      class_num: modal.class_num,
+      note: modal.note,
+      time_start: 0,
+      time_end: 0
+    }
+
+    if (!isReserved){
+      dispatch({
+        type: TICKET_RESERVE,
+        ticket: randTicket
+      })
+
+      dispatch({
+        type: ASSIGN_TICKET,
+        t_id: randTicket.t_id
+      })
+    }
+    // TODO: Represent a ticket already in the works
+    /* else {} */
   }
 }
 

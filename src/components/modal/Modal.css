@@ -1,0 +1,26 @@
+.Modal {
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px 40px;
+  border: solid 1px black;
+  text-align: left;
+}
+
+.Modal-Inner {
+  margin: 0 auto !important;
+  display: block;
+}
+
+Input {
+  width: 30%;
+  margin-bottom: 20px;
+}
+
+label {
+  width: 30%;
+  display: block;
+}
+
+textarea {
+  width: 30%;
+}

@@ -3,10 +3,6 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync,
   reserveTicket,
   getQueueLength
 } from '../../modules/counter'
@@ -16,24 +12,39 @@ import Ticket from '../../components/ticket/Ticket'
 
 import "./Home.css"
 
-const Home = props => (
-  <div className="Home" >
-    <h1>ECE Tutoring Queue</h1>
-    <p>Hello <p className="Home-user-name">{props.user_name}</p>
-          there are currently </p>
-    <p className="Home-queue"> {props.length} People in Line</p>
+const Home = props => {
+  let welcomeMessage = ( props.user_name !== 'GUEST') ?
+      (<p>Hello <p className="Home-user-name">{ props.user_name }</p></p>) :
+      (<div> Not Logged In </div>);
 
-    <CustomerForm />
-    <p><button onClick={() => { props.reserveTicket(); props.getQueueLength()}}> Reserve Now </button></p>
-  </div>
-)
+  return (
+    <div className="Home" >
+      <h1>ECE Tutoring Queue</h1>
+      { welcomeMessage }
+            there are currently
+      <p className="Home-queue"> {props.length} People in Line</p>
+      Tutor Assigned To You: { props.tutor }
+      <CustomerForm />
+      <p><button onClick={() => { props.reserveTicket(); props.getQueueLength()}}> Reserve Now </button></p>
+    </div>
+  )
+}
+  /* From Session */
+  /* From Counter */
+const mapStateToProps = state => {
+  const tutor_name = state.counter.tickets.filter(
+    item => (item.t_id == state.session.user.details.t_id)
+  );
 
-const mapStateToProps = state => ({
-  user_name: state.counter.user.user_name,
+  alert(JSON.stringify(tutor_name[0], null, 4));
+
+  return {
+  user_name: (typeof state.session.user.user_name === 'undefined') ? 'Guest' :
+    state.session.user.user_name,
   length: state.counter.tickets.length,
-  isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing
-})
+  tutor: (tutor_name[0] === undefined || tutor_name == []) ? 'no tutor' : tutor_name[0].tutor_name
+}
+}
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   reserveTicket,
