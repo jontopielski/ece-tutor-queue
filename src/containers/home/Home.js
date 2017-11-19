@@ -36,7 +36,6 @@ const mapStateToProps = state => {
     item => (item.t_id == state.session.user.details.t_id)
   );
 
-  alert(JSON.stringify(tutor_name[0], null, 4));
 
   return {
   user_name: (typeof state.session.user.user_name === 'undefined') ? 'Guest' :

@@ -94,7 +94,6 @@ export default (state = initialState, action) => {
         tutor_id: action.tutor_id,
         tutor_name: action.tutor_name
       }
-      alert(JSON.stringify(data, null, 4))
       return {
         ...state,
         tickets: state.tickets.map(item => item.t_id === action.selected_ticket ?
