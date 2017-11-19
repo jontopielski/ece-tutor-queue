@@ -4,10 +4,10 @@
     isFetching,
     error,
     authedId,
-    [userId]: {
+    [uid]: {
       info: {
         name,
-        userId,
+        uid,
         activityState,
         accountType,
         ticketHistory: [ticketId, ticketId, ticketId],
@@ -52,8 +52,9 @@
           studentName,
           class,
           additionalInfo,
-          timeStart,
-          timeEnd,
+          openTimestamp,
+          inProgressTimestamp,
+          closedTimestamp,
           status
         }
       }
@@ -67,8 +68,9 @@
           studentName,
           class,
           additionalInfo,
-          timeStart,
-          timeEnd,
+          openTimestamp,
+          inProgressTimestamp,
+          closedTimestamp,
           status
         }
       }
